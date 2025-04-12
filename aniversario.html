@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feliz Aniversario</title>
+  <style>
+    @keyframes floatRandom {
+      0% { transform: translate(0, 0) scale(1); opacity: 0; }
+      50% { transform: translate(var(--x), var(--y)) scale(1.2); opacity: 1; }
+      100% { transform: translate(calc(var(--x) * -1), calc(var(--y) * -1)) scale(1); opacity: 0; }
+    }
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Segoe UI', 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+      background: linear-gradient(to bottom, #fff7f0, #e6f9f2);
+      color: #333;
+    }
+    .section {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 0.8s ease;
+      opacity: 0;
+      pointer-events: none;
+      background-color: rgba(255, 255, 255, 0.85);
+      z-index: 1;
+      padding: 30px;
+      text-align: center;
+    }
+    .section.active {
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 10;
+    }
+    .section h2 {
+      font-size: 26px;
+      background: linear-gradient(90deg, #f7e7a6, #e6c9f5);
+      padding: 12px 20px;
+      border-radius: 12px;
+      color: #5a4d70;
+      margin-bottom: 15px;
+    }
+    .section p {
+      font-size: 18px;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    .footer {
+      text-align: center;
+      padding: 20px;
+      font-style: italic;
+      color: #444;
+      z-index: 100;
+      background-color: white;
+      position: relative;
+    }
+    .floating {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      pointer-events: none;
+      animation: floatRandom 12s ease-in-out infinite;
+      font-size: 24px;
+      opacity: 0;
+    }
+    .floating-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 8888;
+      pointer-events: none;
+      animation: floatRandom 20s ease-in-out infinite;
+      width: 100px;
+      height: auto;
+      border-radius: 15px;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="slides"></div>
+  <div class="footer">
+    Gracias por caminar conmigo cada día 💕<br />
+    Por muchos capítulos más juntos...
+  </div>
+  <script>
+    const etapas = [
+      {
+        titulo: "2do de secundaria: El comienzo de nuestra canción",
+        texto: "Recuerdo el día que te vi entrar al salón. Tus ojos brillaban y, sin saberlo, ya me habías conquistado. Te sentaste cerca, y con una sonrisa me preguntaste si conocía una canción: 'Sofía'. Fue en ese momento que supe que no eras solo un nombre, sino el inicio de algo especial.",
+        imagenes: [],
+        iconos: "✨✨✨✨"
+      },
+      {
+        titulo: "6to de secundaria: El inicio de nosotros",
+        texto: "La cuarentena nos acercó aún más. Aunque no éramos novios, ya compartíamos todo. Recuerdo cuando nos fuimos a pasear por la ciudad mientras tu hermana esta en su ensayo. Ese día fue muy especial. Risas, cariño y amor, senti que estábamos creando algo único.",
+        imagenes: [
+          "source/etapa2/IMG-20220315-WA0022.jpg",
+          "source/etapa2/IMG-20220921-WA0018.jpg",
+          "source/etapa2/IMG-20220928-WA0001.jpg",
+          "source/etapa2/IMG-20220930-WA0014.jpg",
+          "source/etapa2/IMG-20220930-WA0020.jpg",
+          "source/etapa2/IMG-20220930-WA0022.jpg",
+          "source/etapa2/IMG-20220930-WA0036.jpg",
+          "source/etapa2/IMG-20221001-WA0043.jpg",
+          "source/etapa2/IMG-20221014-WA0027.jpg",
+          "source/etapa2/IMG-20221031-WA0014.jpg",
+          "source/etapa2/IMG-20221126-WA0050.jpg",
+          "source/etapa2/IMG-20221127-WA0009.jpg",
+          "source/etapa2/IMG-20221130-WA0028.jpg",
+          "source/etapa2/IMG-20221201-WA0028.jpg",
+          "source/etapa2/IMG-20221210-WA0010.jpg",
+          "source/etapa2/IMG-20221210-WA0013.jpg",
+          "source/etapa2/IMG-20221211-WA0017.jpg",
+          "source/etapa2/IMG-20230110-WA0024.jpg",
+          "source/etapa2/IMG-20230116-WA0006.jpg",
+          "source/etapa2/IMG-20230219-WA0139.jpg"
+        ],
+        iconos: "❤️❤️❤️❤️"
+      },
+      {
+        titulo: "Primer año: Amor a la distancia",
+        texto: "El primer año de universidad fue una prueba para nosotros. Te qeudaste y yo me fui. Los kilómetros no fueron fáciles, pero aprendimos a soñar juntos, a extrañarnos, y a valorar cada momento. Aunque la distancia nos separaba físicamente, nosotros seguiamos remando hacía el mismo lugar.",
+        imagenes: [
+  "source/etapa3/IMG-20230419-WA0020.jpg",
+  "source/etapa3/IMG-20230423-WA0043.jpg",
+  "source/etapa3/IMG-20230515-WA0011.jpg",
+  "source/etapa3/IMG-20230521-WA0011.jpg",
+  "source/etapa3/IMG-20230605-WA0013.jpg",
+  "source/etapa3/IMG-20230605-WA0022.jpg",
+  "source/etapa3/IMG-20230610-WA0005.jpg",
+  "source/etapa3/IMG-20230618-WA0036.jpg",
+  "source/etapa3/IMG-20230618-WA0037.jpg",
+  "source/etapa3/P1080189.JPG",
+  "source/etapa3/P1080337.JPG",
+  "source/etapa3/perfil.jpg"
+],
+        iconos: "✈️✈️✈️✈️"
+      },
+      {
+        titulo: "2do año: Reencuentros y aprendizajes",
+        texto: "El segundo año de universidad fue más tranquilo, pero lleno de momentos que fortalecieron nuestra relación. Aprendimos a valorar cada instante juntos. Como aquella vez que te sorprendí en tu cumpleaños, volando hasta ti solo para verte sonreír. ",
+        imagenes: [
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.45_8bf4d6ec.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.45_08487d2a.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.46_3b8899f5.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.46_4d7285ed.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.46_439a0048.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.47_1e897e6c.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.47_04042ee9.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.47_e768300a.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.48_529f3355.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.48_d6e75ed0.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.49_e1890bc9.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.49_ffbcc9c5.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.50_87b25367.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.51_b8049e7d.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.51_5b048903.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.52_5bd95e6d.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.52_f889bd47.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.53_725cb9b1.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.53_856ef4c0.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.54_d5afa49a.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.54_68ffe73b.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.54_893bbd2f.jpg",
+  "source/etapa4/Imagen de WhatsApp 2025-04-12 a las 13.45.54_362464aa.jpg"
+],
+        iconos: "✈️✈️✈️✈️"
+      },
+      {
+        titulo: "Nuestro año: Creciendo juntos",
+        texto: "Este año, celebramos tres años de amor, de sueños compartidos y de un crecimiento, el timepo no se detiene. Aunque nuestras carreras nos mantengan ocupados, hemos descubierto que no necesitamos estar siempre juntos para sentirnos cerca. Cada logro, cada desafío, lo vivimos con la certeza de que este camino lo recorremos juntos, creciendo individualmente para fortalecer nuestro relación.",
+        imagenes: [
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.22_99c4ff896.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.22_bfc96dd2.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.23_8b78671c.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.23_e5a178cd.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.24_0df178c1.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.24_fa0ba2f4.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.25_0c0be978.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.25_d4bcb0f6.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.25_d4d911bf.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.26_3fb9d689.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.26_829883d1.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.27_5dbf8de2.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.27_9e1467e7.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.27_559cd553.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.28_613e7fd4.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.28_d139d6b9.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.29_1dc171e8.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.29_96ee46c9.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.29_780af74b.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.30_34a60573.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.31_66ae6d64.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.31_8dbb8ab8.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.32_93f0b394.jpg",
+  "source/etapa5/Imagen de WhatsApp 2025-04-12 a las 14.00.32_dae7da23.jpg"
+],
+        iconos: "✨✨✨✨"
+      }
+    ];
+
+    const slidesContainer = document.getElementById("slides");
+
+    etapas.forEach((etapa, index) => {
+      const section = document.createElement("div");
+      section.className = "section" + (index === 0 ? " active" : "");
+      section.setAttribute("data-icons", etapa.iconos);
+
+      section.innerHTML = `
+        <h2>${etapa.titulo}</h2>
+        <p>${etapa.texto}</p>
+      `;
+
+      slidesContainer.appendChild(section);
+    });
+
+    const sections = document.querySelectorAll(".section");
+    let current = 0;
+
+    function activateSection(index) {
+      sections.forEach((s, i) => s.classList.toggle("active", i === index));
+      const icons = etapas[index].iconos.split("");
+      const fotos = etapas[index].imagenes;
+      startFloatingIcons(icons);
+      startFloatingFotos(fotos);
+    }
+
+    // Scroll manual en lugar de cambio automático
+    let scrollTimeout;
+    window.addEventListener("wheel", (e) => {
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => (scrollTimeout = null), 600);
+      if (e.deltaY > 20) current = (current + 1) % sections.length;
+      else if (e.deltaY < -20) current = (current - 1 + sections.length) % sections.length;
+      activateSection(current);
+    });
+
+    let iconInterval;
+    function startFloatingIcons(icons) {
+      if (iconInterval) clearInterval(iconInterval);
+      iconInterval = setInterval(() => {
+        const el = document.createElement("div");
+        el.className = "floating";
+        el.textContent = icons[Math.floor(Math.random() * icons.length)];
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.top = Math.random() * 100 + "vh";
+        el.style.setProperty('--x', `${Math.random() * 200 - 100}px`);
+        el.style.setProperty('--y', `${Math.random() * 200 - 100}px`);
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }, 300);
+    }
+
+    let fotoInterval;
+    function startFloatingFotos(fotos) {
+      if (fotoInterval) clearInterval(fotoInterval);
+      fotoInterval = setInterval(() => {
+        const el = document.createElement("img");
+        el.className = "floating-img";
+        el.src = fotos[Math.floor(Math.random() * fotos.length)];
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.top = Math.random() * 100 + "vh";
+        el.style.setProperty('--x', `${Math.random() * 300 - 150}px`);
+        el.style.setProperty('--y', `${Math.random() * 300 - 150}px`);
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 10000);
+      }, 1500);
+    }
+
+    activateSection(current);
+  </script>
+</body>
+</html>
